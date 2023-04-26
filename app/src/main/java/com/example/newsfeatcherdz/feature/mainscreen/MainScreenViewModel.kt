@@ -1,15 +1,20 @@
 package com.example.newsfeatcherdz.feature.mainscreen
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.newsfeatcherdz.base.BaseViewModel
 import com.example.newsfeatcherdz.base.Event
+import com.example.newsfeatcherdz.base.SingleLiveEvent
 import com.example.newsfeatcherdz.feature.bookmarks.domain.BookmarksInteractor
+import com.example.newsfeatcherdz.feature.domain.ArticleModel
 import com.example.newsfeatcherdz.feature.domain.ArticlesInteractor
 import kotlinx.coroutines.launch
 
 class MainScreenViewModel(private val interactor: ArticlesInteractor, private val bookmarksInteractor: BookmarksInteractor): BaseViewModel<ViewState>() {
 
+    private val _goNewsEvent = SingleLiveEvent<Int>()
+    val goNewsEvent: LiveData<Int> = _goNewsEvent
     init {
         processDataEvent(DataEvent.LoadArticles)
     }
@@ -43,6 +48,8 @@ class MainScreenViewModel(private val interactor: ArticlesInteractor, private va
                 viewModelScope.launch {
                     bookmarksInteractor.create(previousState.articlesShown[event.index])
                 }
+                _goNewsEvent.value = event.index
+
                 return null
             }
 

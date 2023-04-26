@@ -9,6 +9,4 @@ fun ArticleRemouteModel.toDomain() = ArticleModel(
     url = url,
     urlToImage = urlToImage ?: "",
     publishedAt = publishedAt
-
-
 )

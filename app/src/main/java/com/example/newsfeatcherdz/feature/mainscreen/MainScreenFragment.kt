@@ -11,18 +11,19 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsfeatcherdz.R
+import com.example.newsfeatcherdz.feature.newsscreen.ui.NewsFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainScreenFragment:Fragment(R.layout.fragment_main_screen) {
+class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
 
     private val viewModel: MainScreenViewModel by viewModel()
-    private  val recyclerView: RecyclerView by lazy { requireActivity().findViewById(R.id.rvArticles) }
-    private val ivSearch: ImageView by lazy {requireActivity().findViewById(R.id.ivSearch)}
-    private val tvTitle: TextView by lazy {requireActivity().findViewById(R.id.tvTitle)}
-    private val etSearch: EditText by lazy {requireActivity().findViewById(R.id.etSearch)}
+    private val recyclerView: RecyclerView by lazy { requireActivity().findViewById(R.id.rvArticles) }
+    private val ivSearch: ImageView by lazy { requireActivity().findViewById(R.id.ivSearch) }
+    private val tvTitle: TextView by lazy { requireActivity().findViewById(R.id.tvTitle) }
+    private val etSearch: EditText by lazy { requireActivity().findViewById(R.id.etSearch) }
     private val adapter: ArticlesAdapter by lazy {
-        ArticlesAdapter{
-            index -> viewModel.processUIEvent(UiEvent.OnArticleClicked(index))
+        ArticlesAdapter { index ->
+            viewModel.processUIEvent(UiEvent.OnArticleClicked(index))
         }
     }
 
@@ -30,13 +31,14 @@ class MainScreenFragment:Fragment(R.layout.fragment_main_screen) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.viewState.observe(viewLifecycleOwner, ::render)
+        viewModel.goNewsEvent.observe(viewLifecycleOwner, ::goNewsFragment)
         recyclerView.adapter = adapter
 
         ivSearch.setOnClickListener {
             viewModel.processUIEvent(UiEvent.OnSearchButtonClicked)
         }
 
-        etSearch.addTextChangedListener(object : TextWatcher{
+        etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
@@ -46,13 +48,21 @@ class MainScreenFragment:Fragment(R.layout.fragment_main_screen) {
             override fun afterTextChanged(text: Editable?) {
                 viewModel.processUIEvent(UiEvent.OnSearchTextEdited(text.toString()))
             }
-
         })
-
     }
-    private fun render(viewState: ViewState){
-        tvTitle.isVisible =!viewState.isSearchEnabled
+
+    private fun render(viewState: ViewState) {
+        tvTitle.isVisible = !viewState.isSearchEnabled
         etSearch.isVisible = viewState.isSearchEnabled
         adapter.setData(viewState.articlesShown)
+    }
+
+    private fun goNewsFragment(index: Int) {
+        val newsFragment = NewsFragment.newInstance(
+            description = viewModel.viewState.value!!.articlesShown[index].description,
+            urlImage = viewModel.viewState.value!!.articlesShown[index].urlToImage
+        )
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.container, newsFragment).addToBackStack(null).commit()
     }
 }
