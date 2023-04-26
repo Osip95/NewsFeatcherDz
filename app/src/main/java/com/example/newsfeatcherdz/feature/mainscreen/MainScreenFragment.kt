@@ -60,9 +60,10 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
     private fun goNewsFragment(index: Int) {
         val newsFragment = NewsFragment.newInstance(
             description = viewModel.viewState.value!!.articlesShown[index].description,
-            urlImage = viewModel.viewState.value!!.articlesShown[index].urlToImage
+            urlImage = viewModel.viewState.value!!.articlesShown[index].urlToImage,
+            title = viewModel.viewState.value!!.articlesShown[index].title
         )
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.container, newsFragment).addToBackStack(null).commit()
+            .replace(R.id.container, newsFragment).commit()
     }
 }
