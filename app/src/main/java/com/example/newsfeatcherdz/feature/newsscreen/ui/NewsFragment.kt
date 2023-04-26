@@ -31,11 +31,12 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         val tvDescription: TextView = view.findViewById(R.id.tvNews)
         val imgView: ImageView = view.findViewById(R.id.filmPreviewImageView)
         val toolbar: Toolbar = view.findViewById(R.id.toolbar)
+        val tvToolbar: TextView = view.findViewById(R.id.custom_title)
         val description = arguments?.getString(DESCRIPTION_KEY) ?: ""
         val urlImage = arguments?.getString(URL_IMAGE_KEY) ?: ""
         val title = arguments?.getString(TITLE_KEY) ?: ""
         tvDescription.text = description
-        toolbar.title = title
+        tvToolbar.text = title
         Glide
             .with(this)
             .load(urlImage)
