@@ -1,6 +1,6 @@
 package com.example.newsfeatcherdz.feature.data
 
-import com.example.newsfeatcherdz.feature.data.ArticlesRepository
+
 import com.example.newsfeatcherdz.feature.data.model.toDomain
 import com.example.newsfeatcherdz.feature.domain.ArticleModel
 

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsfeatcherdz.R
 import com.example.newsfeatcherdz.feature.newsscreen.ui.NewsFragment
+import com.example.newsfeatcherdz.feature.shared.ArticlesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
@@ -19,7 +20,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
     private val viewModel: MainScreenViewModel by viewModel()
     private val recyclerView: RecyclerView by lazy { requireActivity().findViewById(R.id.rvArticles) }
     private val ivSearch: ImageView by lazy { requireActivity().findViewById(R.id.ivSearch) }
-    private val tvTitle: TextView by lazy { requireActivity().findViewById(R.id.tvTitle) }
+    private val tvTitle: TextView by lazy { requireActivity().findViewById(R.id.tvTitleMainFragment) }
     private val etSearch: EditText by lazy { requireActivity().findViewById(R.id.etSearch) }
     private val adapter: ArticlesAdapter by lazy {
         ArticlesAdapter { index ->
@@ -63,7 +64,8 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
             urlImage = viewModel.viewState.value!!.articlesShown[index].urlToImage,
             title = viewModel.viewState.value!!.articlesShown[index].title
         )
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.container, newsFragment).commit()
+        requireActivity().supportFragmentManager.beginTransaction().hide(this)
+            .add(R.id.container, newsFragment).addToBackStack(null).commit()
+
     }
 }

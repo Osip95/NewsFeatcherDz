@@ -1,13 +1,16 @@
 package com.example.newsfeatcherdz.feature.bookmarks.ui
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.newsfeatcherdz.base.BaseViewModel
 import com.example.newsfeatcherdz.base.Event
+import com.example.newsfeatcherdz.base.SingleLiveEvent
 import com.example.newsfeatcherdz.feature.bookmarks.domain.BookmarksInteractor
 import kotlinx.coroutines.launch
 
 class BookmarksScreenViewModel(private val interactor: BookmarksInteractor): BaseViewModel<ViewState>() {
-
+    private val _goNewsEvent = SingleLiveEvent<Int>()
+    val goNewsEvent: LiveData<Int> = _goNewsEvent
    init {
        processDataEvent(DataEvent.LoadBookmarks)
    }
@@ -33,6 +36,10 @@ class BookmarksScreenViewModel(private val interactor: BookmarksInteractor): Bas
             is DataEvent.OnSuccessBookmarksLoaded -> {
                 return previousState.copy(bookmarksArticle = event.bookmarksArticle)
 
+            }
+            is UiEvent.OnArticleClicked ->{
+                _goNewsEvent.value=event.index
+                return null
             }
             else -> return null
         }

@@ -7,7 +7,6 @@ import com.example.newsfeatcherdz.base.BaseViewModel
 import com.example.newsfeatcherdz.base.Event
 import com.example.newsfeatcherdz.base.SingleLiveEvent
 import com.example.newsfeatcherdz.feature.bookmarks.domain.BookmarksInteractor
-import com.example.newsfeatcherdz.feature.domain.ArticleModel
 import com.example.newsfeatcherdz.feature.domain.ArticlesInteractor
 import kotlinx.coroutines.launch
 
