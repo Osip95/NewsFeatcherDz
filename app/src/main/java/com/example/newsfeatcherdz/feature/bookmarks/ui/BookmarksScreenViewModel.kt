@@ -6,11 +6,12 @@ import com.example.newsfeatcherdz.base.BaseViewModel
 import com.example.newsfeatcherdz.base.Event
 import com.example.newsfeatcherdz.base.SingleLiveEvent
 import com.example.newsfeatcherdz.feature.bookmarks.domain.BookmarksInteractor
+import com.example.newsfeatcherdz.feature.domain.ArticleModel
 import kotlinx.coroutines.launch
 
 class BookmarksScreenViewModel(private val interactor: BookmarksInteractor): BaseViewModel<ViewState>() {
-    private val _goNewsEvent = SingleLiveEvent<Int>()
-    val goNewsEvent: LiveData<Int> = _goNewsEvent
+    private val _goNewsEvent = SingleLiveEvent<ArticleModel>()
+    val goNewsEvent: LiveData<ArticleModel> = _goNewsEvent
    init {
        processDataEvent(DataEvent.LoadBookmarks)
    }
@@ -38,7 +39,7 @@ class BookmarksScreenViewModel(private val interactor: BookmarksInteractor): Bas
 
             }
             is UiEvent.OnArticleClicked ->{
-                _goNewsEvent.value=event.index
+                _goNewsEvent.value=previousState.bookmarksArticle[event.index]
                 return null
             }
             else -> return null

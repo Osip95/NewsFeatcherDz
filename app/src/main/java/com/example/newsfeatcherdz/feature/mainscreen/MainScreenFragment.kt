@@ -11,8 +11,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsfeatcherdz.R
-import com.example.newsfeatcherdz.feature.newsscreen.ui.NewsFragment
-import com.example.newsfeatcherdz.feature.shared.ArticlesAdapter
+import com.example.newsfeatcherdz.feature.article_details_screen.ui.ArticleDetailsFragment
+import com.example.newsfeatcherdz.feature.domain.ArticleModel
+import com.example.newsfeatcherdz.shared.ArticlesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
@@ -58,14 +59,14 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
         adapter.setData(viewState.articlesShown)
     }
 
-    private fun goNewsFragment(index: Int) {
-        val newsFragment = NewsFragment.newInstance(
-            description = viewModel.viewState.value!!.articlesShown[index].description,
-            urlImage = viewModel.viewState.value!!.articlesShown[index].urlToImage,
-            title = viewModel.viewState.value!!.articlesShown[index].title
+    private fun goNewsFragment(articleModel: ArticleModel) {
+        val articleDetailsFragment = ArticleDetailsFragment.newInstance(
+            description = articleModel.description,
+            urlImage = articleModel.urlToImage,
+            title = articleModel.title
         )
         requireActivity().supportFragmentManager.beginTransaction().hide(this)
-            .add(R.id.container, newsFragment).addToBackStack(null).commit()
+            .add(R.id.container, articleDetailsFragment).addToBackStack(null).commit()
 
     }
 }

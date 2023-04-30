@@ -1,4 +1,4 @@
-package com.example.newsfeatcherdz.feature.shared
+package com.example.newsfeatcherdz.shared
 
 import android.view.LayoutInflater
 import android.view.View
