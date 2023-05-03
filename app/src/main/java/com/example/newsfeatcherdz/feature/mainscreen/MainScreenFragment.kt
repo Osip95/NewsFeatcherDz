@@ -11,7 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsfeatcherdz.R
-import com.example.newsfeatcherdz.feature.article_details_screen.ui.ArticleDetailsFragment
+import com.example.newsfeatcherdz.feature.articledetailsscreen.ui.ArticleDetailsFragment
 import com.example.newsfeatcherdz.feature.domain.ArticleModel
 import com.example.newsfeatcherdz.shared.ArticlesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,7 +33,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.viewState.observe(viewLifecycleOwner, ::render)
-        viewModel.goNewsEvent.observe(viewLifecycleOwner, ::goNewsFragment)
+        viewModel.goNewsEvent.observe(viewLifecycleOwner, ::goArticlesDetailsScreen)
         recyclerView.adapter = adapter
 
         ivSearch.setOnClickListener {
@@ -59,7 +59,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
         adapter.setData(viewState.articlesShown)
     }
 
-    private fun goNewsFragment(articleModel: ArticleModel) {
+    private fun goArticlesDetailsScreen(articleModel: ArticleModel) {
         val articleDetailsFragment = ArticleDetailsFragment.newInstance(
             description = articleModel.description,
             urlImage = articleModel.urlToImage,

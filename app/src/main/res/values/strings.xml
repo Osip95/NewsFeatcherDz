@@ -2,6 +2,4 @@
     <string name="app_name">NewsFeatcherDz</string>
     <string name="main">Главная</string>
     <string name="favorite">Избранное</string>
-    <string name="favorites">Избранное</string>
-    <string name="main_screen_toolbar">Главная</string>
 </resources>
