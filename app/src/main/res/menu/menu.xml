@@ -9,7 +9,6 @@
         android:id="@+id/itemBookmarks"
         android:title="@string/favorite"
         android:icon="@drawable/baseline_bookmark_24"
-
         />
 
 </menu>

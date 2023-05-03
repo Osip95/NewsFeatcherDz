@@ -20,11 +20,16 @@
         android:id="@+id/bnvBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="?colorBottomMenuBackground"
+        app:itemActiveIndicatorStyle="@null"
+        app:itemBackground="?colorBottomMenuBackground"
+        app:itemIconTint="@color/bottom_nav_colors"
+        app:itemRippleColor="#000000"
+        app:itemTextColor="@color/bottom_nav_colors"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

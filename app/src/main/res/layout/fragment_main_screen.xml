@@ -9,9 +9,8 @@
         android:id="@+id/layoutToolbar"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:background="@color/purple_700"
-        android:orientation="horizontal"
         android:elevation="10dp"
+        android:background="?colorToolBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,14 +21,14 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="16dp"
             android:fontFamily="sans-serif-smallcaps"
-            android:textColor="#FFFFFF"
+            android:textColor="?textColorTitle"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/ivSearch"
             app:layout_constraintEnd_toStartOf="@id/ivSearch"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/ivSearch"
-            android:text="@string/main_screen_toolbar"/>
+            android:text="@string/main"/>
 
 
         <EditText
@@ -37,11 +36,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:shadowColor="#FAFAFA"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textColorLink="#FFFFFF"
+            android:shadowColor="?textColorTitle"
+            android:textColor="?textColorTitle"
+            android:textCursorDrawable="@null"
+            android:textColorHighlight="?textColorTitle"
+            android:textColorHint="?textColorTitle"
+            android:textColorLink="?textColorTitle"
             android:textStyle="bold"
+            android:backgroundTint="?textColorTitle"
             app:layout_constraintBaseline_toBottomOf="@id/ivSearch"
             app:layout_constraintEnd_toStartOf="@id/ivSearch"
             app:layout_constraintStart_toStartOf="parent"
